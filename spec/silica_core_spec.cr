@@ -8,6 +8,10 @@ describe SilicaCore do
 
     gen = SilicaCore::CppGenerator.new io
 
+    gen.include_guard
+    gen.require_support
+    gen.separator
+
     gen.doc do 
       emit "Example namespace"
       separator
@@ -19,7 +23,7 @@ describe SilicaCore do
     end
 
     io.rewind
-    io.gets_to_end.should eq("/**\nExample namespace\n\nGenerated with SilicaCore\n*/\nnamespace foo\n{\n  constexpr static int bar = 0;\n}\n")
+    io.gets_to_end.should eq("#pragma once\n#include <silica.hpp>\n\n/**\nExample namespace\n\nGenerated with SilicaCore\n*/\nnamespace foo\n{\n  constexpr static int bar = 0;\n}\n")
   end
 
   it "escapes strings" do

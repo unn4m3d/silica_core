@@ -85,7 +85,7 @@ module SilicaCore
             opening = local ? '"' : '<'
             ending = local ? '"' : '>'
 
-            emit "#include #{opening}name#{ending}", true
+            emit "#include #{opening}#{name}#{ending}", true
         end
         
         def require_support : Generator
