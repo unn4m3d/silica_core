@@ -1,6 +1,6 @@
 # silica_core
 
-TODO: Write a description here
+A simple helper and interface to generate code
 
 ## Installation
 
@@ -9,26 +9,28 @@ TODO: Write a description here
    ```yaml
    dependencies:
      silica_core:
-       github: your-github-user/silica_core
+       github: unn4m3d/silica_core
    ```
 
 2. Run `shards install`
 
 ## Usage
 
-```crystal
-require "silica_core"
-```
-
-TODO: Write usage instructions here
+See [spec](spec/silica_core_spec.cr)
 
 ## Development
 
-TODO: Write development instructions here
+TODO:
+* [ ]More specs
+* [ ] Docs
+* [ ] Useful methods
+* [ ] Support more languages
+  * [ ] Crystal
+  * [ ] ???
 
 ## Contributing
 
-1. Fork it (<https://github.com/your-github-user/silica_core/fork>)
+1. Fork it (<https://github.com/unn4m3d/silica_core/fork>)
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
@@ -36,4 +38,4 @@ TODO: Write development instructions here
 
 ## Contributors
 
-- [unn4m3d](https://github.com/your-github-user) - creator and maintainer
+- [unn4m3d](https://github.com/unn4m3d) - creator and maintainer
