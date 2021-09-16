@@ -23,6 +23,6 @@ module SilicaCore
         end
 
         abstract def escape(str : String) : String
-        abstract def instance(type : String, name : String, args : Array(String)) : self
+        abstract def instance(type : String, name : String, args : Array(String) = [] of String) : self
     end
 end

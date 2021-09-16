@@ -117,8 +117,12 @@ module SilicaCore
             end 
         end
 
-        def instance(type : String, name : String, args : Array(String)) : Generator
-            emit "#{type} #{name}(#{args.join(", ")})"
+        def instance(type : String, name : String, args : Array(String) = [] of String) : Generator
+            if args.empty?
+                emit "#{type} #{name}"
+            else
+                emit "#{type} #{name}(#{args.join(", ")})"
+            end
         end
     end
 end
