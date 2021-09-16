@@ -35,7 +35,7 @@ module SilicaCore
             self
         end
 
-        def block(header : String, &) : Generator
+        def block(header : String, separator : Bool = false, &) : Generator
             emit header, true
             emit "{", true
             old_depth = @depth
@@ -44,7 +44,7 @@ module SilicaCore
                 with self yield
             ensure
                 @depth = old_depth
-                emit "}", true
+                emit "}", !separator
             end
             self
         end

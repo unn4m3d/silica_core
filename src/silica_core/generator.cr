@@ -1,7 +1,7 @@
 module SilicaCore
     abstract class Generator
         abstract def emit(line : String, no_sep = false, no_newline = false) : self
-        abstract def block(header : String, &) : self
+        abstract def block(header : String, separator : Bool = false, &) : self
         abstract def comment(line : String) : self
         abstract def separator : self
 
