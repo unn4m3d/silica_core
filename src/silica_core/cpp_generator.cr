@@ -92,6 +92,29 @@ module SilicaCore
             require_file "silica.hpp"
         end
 
-
+        def escape(str : String) : String
+            String.build str.size do |s|
+                s << %(")
+                str.each_char do |char|
+                    case char
+                    when '\t'
+                        s << "\\t"
+                    when '\r'
+                        s << "\\r"
+                    when '\n'
+                        s << "\\n"
+                    when '\e'
+                        s << "\\e"
+                    when '\\' 
+                        s << "\\\\"
+                    when '"'
+                        s << "\\\""
+                    else
+                        s << char
+                    end
+                end
+                s << %(")
+            end 
+        end
     end
 end

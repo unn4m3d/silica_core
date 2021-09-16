@@ -21,4 +21,10 @@ describe SilicaCore do
     io.rewind
     io.gets_to_end.should eq("/**\nExample namespace\n\nGenerated with SilicaCore\n*/\nnamespace foo\n{\n  constexpr static int bar = 0;\n}\n")
   end
+
+  it "escapes strings" do
+    io = IO::Memory.new 
+    g = SilicaCore::CppGenerator.new io
+    g.escape("foo\t\\bar\n\\baz").should eq %("foo\\t\\\\bar\\n\\\\baz") 
+  end
 end

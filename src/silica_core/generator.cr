@@ -21,5 +21,7 @@ module SilicaCore
         def generate(&)
             with self yield
         end
+
+        abstract def escape(str : String) : String
     end
 end
