@@ -116,5 +116,9 @@ module SilicaCore
                 s << %(")
             end 
         end
+
+        def instance(type : String, name : String, args : Array(String)) : Generator
+            emit "#{type} #{name}(#{args.join(", ")})"
+        end
     end
 end
