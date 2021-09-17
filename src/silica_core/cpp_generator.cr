@@ -9,6 +9,8 @@ module SilicaCore
             @doc_mode = false
         end
 
+        getter io
+
         def emit(line, no_sep = false, no_newline = false) : Generator
             if !no_sep && !(line =~ /#{LINE_SEPARATOR}\n?$/) && !@doc_mode
                 line += LINE_SEPARATOR
@@ -138,6 +140,10 @@ module SilicaCore
             else
                 emit "#{type} #{name}(#{args.join(", ")})"
             end
+        end
+
+        def close
+            @io.close
         end
     end
 end
