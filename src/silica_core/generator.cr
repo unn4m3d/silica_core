@@ -26,5 +26,7 @@ module SilicaCore
         abstract def instance(type : String, name : String, args : Array(String) = [] of String) : self
 
         abstract def close
+
+        abstract def escape_keywords(s : String) : String
     end
 end

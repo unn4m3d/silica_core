@@ -133,8 +133,16 @@ module SilicaCore
             wchar_t while xor xor_eq
         )
 
+        def escape_keywords(str : String) : String
+            if KEYWORDS.includes? str
+                "_#{str}"
+            else
+                str
+            end
+        end
+
         def instance(type : String, name : String, args : Array(String) = [] of String) : Generator
-            name = "_#{name}" if KEYWORDS.includes? name
+            name = escape_keywords name
             if args.empty?
                 emit "#{type} #{name}"
             else
