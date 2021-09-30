@@ -24,7 +24,7 @@ module SilicaCore
             {{yield}}
         
             def to_s(io : IO, &)
-                ECR.embed {{file}}
+                ECR.embed {{file}}, io
             end
         end
     end
