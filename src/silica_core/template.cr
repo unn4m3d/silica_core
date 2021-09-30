@@ -9,6 +9,14 @@ module SilicaCore
                 to_s f, &block
             end
         end
+
+        def to_s(io)
+            to_s(io) {}
+        end
+
+        def to_s : String
+            to_s {}
+        end
     end
 
     macro ecr_template(name, file, &)
