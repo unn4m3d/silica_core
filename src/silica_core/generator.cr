@@ -5,7 +5,7 @@ module SilicaCore
         abstract def comment(line : String) : self
         abstract def separator : self
 
-        abstract def doc(&) : self
+        abstract def doc(& : DocGenerator->) : self
         abstract def namespace(name : String, &) : self
         abstract def constant(type : String, name : String, value : String) : self
 
@@ -33,6 +33,7 @@ module SilicaCore
         abstract def g_struct(name : String, ancestors : Array(String) = [] of String, &) : self
         abstract def g_enum(name : String, type : String, &) : self
         abstract def g_enum_member(name : String, value : String) : self
+        abstract def g_enum_member(name : String) : self
         abstract def g_constant(type : String, name : String, value : String) : self
         abstract def g_alias(name : String, tgt : String) : self
 

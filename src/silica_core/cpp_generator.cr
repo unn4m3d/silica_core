@@ -11,7 +11,7 @@ module SilicaCore
         getter io
 
         def emit(line, no_sep = false, no_newline = false) : Generator
-            if !no_sep && !(line =~ /#{LINE_SEPARATOR}\n?$/) && !@doc_mode
+            if !no_sep && !(line =~ /#{LINE_SEPARATOR}\n?$/)
                 line += LINE_SEPARATOR
             end
 
@@ -55,10 +55,10 @@ module SilicaCore
             self
         end
 
-        def doc(&) : Generator
+        def doc(& : DocGenerator->) : Generator
             doxygen = DoxygenGenerator.new self
             doxygen.doc_comment do 
-                with self yield
+                with self yield doxygen
             end
             self
         end
@@ -188,6 +188,15 @@ module SilicaCore
 
             @enum_member_first = false
             emit "#{name} = #{value}", no_sep: true, no_newline: true
+        end
+
+        def g_enum_member(name : String) : self
+            unless @enum_member_first
+                emit ",", no_sep: true
+            end
+
+            @enum_member_first = false
+            emit name , no_sep: true, no_newline: true
         end
 
         def g_constant(type : String, name : String, value : String) : self

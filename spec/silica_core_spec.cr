@@ -12,10 +12,10 @@ describe SilicaCore do
     gen.require_support
     gen.separator
 
-    gen.doc do 
-      emit "Example namespace"
-      separator
-      emit "Generated with SilicaCore"
+    gen.doc do |d|
+      d.summary "Example namespace"
+      d.separator
+      d.summary "Generated with SilicaCore"
     end
 
     gen.namespace "foo" do
@@ -23,7 +23,7 @@ describe SilicaCore do
     end
 
     io.rewind
-    io.gets_to_end.should eq("#pragma once\n#include <silica.hpp>\n\n/**\nExample namespace\n\nGenerated with SilicaCore\n*/\nnamespace foo\n{\n  constexpr static int bar = 0;\n}\n")
+    io.gets_to_end.should eq("#pragma once\n#include <silica.hpp>\n\n/**\n * Example namespace\n *\n * Generated with SilicaCore\n */\nnamespace foo\n{\n  constexpr static int bar = 0;\n}\n")
   end
 
   it "escapes strings" do
