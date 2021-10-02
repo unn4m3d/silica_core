@@ -6,7 +6,6 @@ module SilicaCore
 
         def initialize(@io : IO, @tab : String = "  ", @newline : String = "\n")
             @depth = 0u64
-            @doc_mode = false
         end
 
         getter io
@@ -57,14 +56,9 @@ module SilicaCore
         end
 
         def doc(&) : Generator
-            old_doc_mode = @doc_mode
-            @doc_mode = true
-            emit "/**"
-            begin
+            doxygen = DoxygenGenerator.new self
+            doxygen.doc_comment do 
                 with self yield
-            ensure
-                emit "*/"
-                @doc_mode = old_doc_mode
             end
             self
         end
@@ -152,6 +146,72 @@ module SilicaCore
 
         def close
             @io.close
+        end
+
+        def g_module(name : String, includes : Array(String) = [] of String, &) : self
+            header = if includes.size == 0
+                "struct #{name}"
+            elsif includes.size == 1
+                "struct #{name} : #{includes.first}"
+            else
+                "struct #{name} : virtual #{includes.join(", ")}"
+            end
+
+            block header, separator: true do 
+                with self yield
+            end
+        end
+
+        def g_struct(name : String, ancestors : Array(String) = [] of String, &) : self
+            g_module name, ancestors do 
+                with self yield
+            end
+        end
+
+        @enum_member_first = true
+
+        def g_enum(name : String, type : String, &) : self
+            block "enum class #{name} : #{type}", separator: true do 
+                begin
+                    @enum_member_first = true
+                    with self yield
+                ensure
+                    emit "", no_sep: true
+                end
+            end
+        end
+
+        def g_enum_member(name : String, value : String) : self
+            unless @enum_member_first
+                emit ",", no_sep: true
+            end
+
+            @enum_member_first = false
+            emit "#{name} = #{value}", no_sep: true, no_newline: true
+        end
+
+        def g_constant(type : String, name : String, value : String) : self
+            emit "constexpr const static #{type} #{name} = #{value}"
+        end
+
+        def g_alias(name : String, tgt : String) : self
+            emit "using #{name} = #{tgt}"
+        end
+
+        def generic(type : String, args : Array(String)) : String
+            "#{type}<#{args.join(", ")} >"
+        end
+            
+        def generic(type : String, *args : String) : String
+            generic type, args.to_a
+        end
+        
+        def path(parts : Array(String)) : String
+            parts.join("::")
+        end
+
+        def path(*parts : String) : String
+            path parts.to_a
         end
     end
 end

@@ -32,3 +32,25 @@ describe SilicaCore do
     g.escape("foo\t\\bar\n\\baz").should eq %("foo\\t\\\\bar\\n\\\\baz") 
   end
 end
+
+describe SilicaCore::DoxygenGenerator do 
+  it "works" do 
+    io = IO::Memory.new
+    gen = SilicaCore::CppGenerator.new io
+
+    doxygen = SilicaCore::DoxygenGenerator.new gen
+
+    doxygen.doc_comment do 
+      brief "Example"
+      separator
+      summary "Example method"
+      separator
+      param ["foo", "Foo"]
+      param ["bar", "Bar object"]
+      returns "Baz"
+    end
+
+    io.rewind
+    io.gets_to_end.should eq("/**\n * @brief Example\n *\n * Example method\n *\n * @param foo Foo\n * @param bar Bar object\n * @returns Baz\n */\n")
+  end
+end
