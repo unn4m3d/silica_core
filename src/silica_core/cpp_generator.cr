@@ -181,6 +181,17 @@ module SilicaCore
             end
         end
 
+        def g_enum(name : String, &) : self
+            block "enum class #{name}", separator: true do 
+                begin
+                    @enum_member_first = true
+                    with self yield
+                ensure
+                    emit "", no_sep: true
+                end
+            end
+        end
+
         def g_enum_member(name : String, value : String) : self
             unless @enum_member_first
                 emit ",", no_sep: true

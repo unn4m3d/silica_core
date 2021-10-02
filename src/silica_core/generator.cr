@@ -32,6 +32,7 @@ module SilicaCore
         abstract def g_module(name : String, includes : Array(String) = [] of String, &) : self
         abstract def g_struct(name : String, ancestors : Array(String) = [] of String, &) : self
         abstract def g_enum(name : String, type : String, &) : self
+        abstract def g_enum(name : String, &) : self
         abstract def g_enum_member(name : String, value : String) : self
         abstract def g_enum_member(name : String) : self
         abstract def g_constant(type : String, name : String, value : String) : self
