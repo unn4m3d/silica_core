@@ -10,12 +10,12 @@ module SilicaCore
 
         getter io
 
-        def emit(line, no_sep = false, no_newline = false) : Generator
+        def emit(line, no_sep = false, no_newline = false, no_indent = false) : Generator
             if !no_sep && !(line =~ /#{LINE_SEPARATOR}\n?$/)
                 line += LINE_SEPARATOR
             end
 
-            @io << @tab * @depth
+            @io << @tab * @depth unless no_indent
             @io << line << ((line.ends_with?(@newline) || no_newline) ? "" : @newline)
             self
         end
