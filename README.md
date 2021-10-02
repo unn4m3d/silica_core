@@ -22,7 +22,8 @@ See [spec](spec/silica_core_spec.cr)
 
 TODO:
 * [ ]More specs
-* [ ] Docs
+* [x] Docs (methods)
+* [ ] Docs (API reference)
 * [ ] Useful methods
 * [ ] Support more languages
   * [ ] Crystal
