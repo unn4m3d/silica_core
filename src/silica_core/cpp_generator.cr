@@ -194,7 +194,7 @@ module SilicaCore
 
         def g_enum_member(name : String, value : String) : self
             unless @enum_member_first
-                emit ",", no_sep: true
+                emit ",", no_sep: true, no_indent: true
             end
 
             @enum_member_first = false
@@ -203,7 +203,7 @@ module SilicaCore
 
         def g_enum_member(name : String) : self
             unless @enum_member_first
-                emit ",", no_sep: true
+                emit ",", no_sep: true, no_indent: true
             end
 
             @enum_member_first = false
