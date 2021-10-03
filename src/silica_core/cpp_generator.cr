@@ -192,23 +192,36 @@ module SilicaCore
             end
         end
 
-        def g_enum_member(name : String, value : String) : self
+        def g_enum_member(name : String, value : String, &) : self
             unless @enum_member_first
                 emit ",", no_sep: true, no_indent: true
             end
+
+            with self yield
 
             @enum_member_first = false
             emit "#{name} = #{value}", no_sep: true, no_newline: true
         end
 
-        def g_enum_member(name : String) : self
+        def g_enum_member(name : String, &) : self
             unless @enum_member_first
                 emit ",", no_sep: true, no_indent: true
             end
 
+            with self yield
+
             @enum_member_first = false
             emit name , no_sep: true, no_newline: true
         end
+
+        def g_enum_member(name : String, value : String) : self
+            g_enum_member(name, value) {}
+        end
+
+        def g_enum_member(name : String) : self
+            g_enum_member(name) {}
+        end
+
 
         def g_constant(type : String, name : String, value : String) : self
             emit "constexpr const static #{type} #{name} = #{value}"

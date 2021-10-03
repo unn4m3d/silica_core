@@ -35,6 +35,8 @@ module SilicaCore
         abstract def g_enum(name : String, &) : self
         abstract def g_enum_member(name : String, value : String) : self
         abstract def g_enum_member(name : String) : self
+        abstract def g_enum_member(name : String, value : String, &) : self
+        abstract def g_enum_member(name : String, &) : self
         abstract def g_constant(type : String, name : String, value : String) : self
         abstract def g_alias(name : String, tgt : String) : self
 
