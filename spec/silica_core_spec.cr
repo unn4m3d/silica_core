@@ -27,20 +27,20 @@ describe SilicaCore do
   end
 
   it "escapes strings" do
-    io = IO::Memory.new 
+    io = IO::Memory.new
     g = SilicaCore::CppGenerator.new io
-    g.escape("foo\t\\bar\n\\baz").should eq %("foo\\t\\\\bar\\n\\\\baz") 
+    g.escape("foo\t\\bar\n\\baz").should eq %("foo\\t\\\\bar\\n\\\\baz")
   end
 end
 
-describe SilicaCore::DoxygenGenerator do 
-  it "works" do 
+describe SilicaCore::DoxygenGenerator do
+  it "works" do
     io = IO::Memory.new
     gen = SilicaCore::CppGenerator.new io
 
     doxygen = SilicaCore::DoxygenGenerator.new gen
 
-    doxygen.doc_comment do 
+    doxygen.doc_comment do
       brief "Example"
       separator
       summary "Example method"
